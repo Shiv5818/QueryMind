@@ -9,6 +9,7 @@ class CrawlResponse(BaseModel):
     """Response model for the crawl endpoint."""
     url: str = Field(..., description="URL that was crawled")
     chunk_count: int = Field(..., description="Number of text chunks extracted")
+    processed_count: int = Field(..., description="Number of relevant text chunks after preprocessing")
     indexed_count: int = Field(..., description="Number of chunks successfully indexed")
 
 class QueryRequest(BaseModel):

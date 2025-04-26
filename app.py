@@ -229,14 +229,5 @@ with st.sidebar:
                 st.markdown(f"**{item['role'].title()}**: {item['content'][:50]}...")
         else:
             st.write("No conversation history yet.")
-    st.divider()
-    try:
-        response = requests.get(f"{API_BASE_URL}/")
-        if response.status_code == 200:
-            st.success("✅ Connected to API")
-        else:
-            st.error("❌ API Error")
-    except:
-        st.error("❌ Cannot connect to API")
 
 # To run: streamlit run app_fixed.py
