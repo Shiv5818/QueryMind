@@ -66,7 +66,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Constants
-API_BASE_URL = "http://localhost:8000"  # Update this if your API is hosted elsewhere
+API_BASE_URL = "http://localhost:8000/api"  # Update this if your API is hosted elsewhere
 
 # Initialize session ID for memory management
 if "session_id" not in st.session_state:
