@@ -2,20 +2,28 @@
 
 > "A state-of-the-art Retrieval-Augmented Generation (RAG) system that combines intent classification, knowledge graph augmentation, and hybrid graph-vector retrieval to deliver fast, accurate, and context-aware responses."
 
-[![Demo Video](https://img.youtube.com/vi/7H3CFDmschA/0.jpg)](https://www.youtube.com/watch?v=7H3CFDmschA)
-
-
-## 📚 Overview
-
 In an era of information overload, our RAG Web Crawler & Chatbot redefines how users interact with data. By integrating **Gemini 1.5 Pro's massive context window**, **Pinecone's high-performance vector indexes**, **Neo4j's graph traversals**, and **FastAPI optimizations**, this system achieves **sub-100 ms query routing and response generation** at scale. Whether it's answering complex queries or maintaining conversational context, this project pushes the boundaries of AI-driven retrieval systems.
 
-## ✨ Key Features
+## 😊 Demo Video:
+[![Demo Video](https://img.youtube.com/vi/7H3CFDmschA/0.jpg)](https://www.youtube.com/watch?v=7H3CFDmschA)
 
-- **Intent Intelligence**: Dynamic query routing for precision handling  
-- **Knowledge Graphs**: Rich, structured context for deeper insights  
-- **Hybrid Retrieval**: Best of graph and vector search combined  
-- **High Performance**: Scalable backend with sub-100 ms latency  
-- **Conversational Memory**: Seamless context across interactions  
+## 🚀 Key Features
+
+1. **Intent Intelligence**  
+   Dynamically routes each incoming request to the optimal service based on real-time intent analysis, ensuring precision handling for every query.
+
+2. **High Performance**  
+   Scales horizontally with a backend engineered for sub-100 ms end-to-end latency, even under high concurrency.
+
+3. **Conversational Memory**  
+   Maintains dialogue context across turns and sessions, enabling seamless, stateful interactions without losing track of prior information.
+
+4. **AI-Powered Web Scraping**  
+   - **Automated Extraction**: Uses NLP and computer-vision models to detect and pull structured data (tables, lists, metadata) from any public website.  
+   - **Adaptive Selectors**: Learns page layouts and self-heals against template changes, reducing maintenance overhead.  
+   - **Compliance-Aware Crawling**: Respects `robots.txt`, rate limits requests, and includes built-in proxy rotation.  
+   - **Data Normalization**: Cleans, deduplicates, and outputs scraped data in JSON, CSV, or your custom schema.  
+ 
 
 ## 🏗️ System Architecture
 
