@@ -2,7 +2,8 @@
 
 > "A state-of-the-art Retrieval-Augmented Generation (RAG) system that combines intent classification, knowledge graph augmentation, and hybrid graph-vector retrieval to deliver fast, accurate, and context-aware responses."
 
-![RAG System Banner](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0005cb44-e213-42ff-9dae-312b49c0b191_2000x1190.jpeg)
+[![Demo Video](https://img.youtube.com/vi/7H3CFDmschA/0.jpg)](https://www.youtube.com/watch?v=7H3CFDmschA)
+
 
 ## 📚 Overview
 
