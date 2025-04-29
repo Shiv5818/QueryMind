@@ -1,8 +1,8 @@
 # Advanced RAG Web Crawler & Chatbot
 
-> "A state-of-the-art Retrieval-Augmented Generation (RAG) system that combines intent classification, knowledge graph augmentation, and hybrid graph-vector retrieval to deliver fast, accurate, and context-aware responses."
+> "A state-of-the-art Retrieval-Augmented Generation (RAG) system that combines intent classification and dynamic pipeline selection to deliver fast, accurate, and context-aware responses."
 
-In an era of information overload, our RAG Web Crawler & Chatbot redefines how users interact with data. By integrating **Gemini 1.5 Pro's massive context window**, **Pinecone's high-performance vector indexes**, **Neo4j's graph traversals**, and **FastAPI optimizations**, this system achieves **sub-100 ms query routing and response generation** at scale. Whether it's answering complex queries or maintaining conversational context, this project pushes the boundaries of AI-driven retrieval systems.
+In an era of information overload, our RAG Web Crawler & Chatbot redefines how users interact with data. By integrating Gemini 1.5 Pro's massive context window, Pinecone's high-performance vector indexes, and FastAPI optimizations, this system achieves sub-100 ms query routing and response generation at scale. Whether it's answering complex queries or maintaining conversational context, this project pushes the boundaries of AI-driven retrieval systems.
 
 ## 😊 Demo Video:
 [![Demo Video](https://img.youtube.com/vi/7H3CFDmschA/0.jpg)](https://www.youtube.com/watch?v=7H3CFDmschA)
@@ -34,7 +34,6 @@ In an era of information overload, our RAG Web Crawler & Chatbot redefines how u
   - Query Service: Vector search and document retrieval
   - Chat Service: LLM integration and response generation
 - **Vector Store**: Pinecone integration for document storage and retrieval
-- **Graph Database**: Neo4j for knowledge graph operations
 - **LLM Integration**: Google Gemini 1.5 Pro for text generation
 
 ### Frontend (Streamlit)
@@ -53,56 +52,41 @@ flowchart TB
     %% Main flow nodes with icons
     A["🔍 Intent Detection"]:::blue
     B["🧠 Pipeline Selection"]:::green
-    C["🔄 Hybrid Retrieval"]:::orange
-    D["⚖️ Re-ranking & Fusion"]:::purple
-    E["💬 Response Generation"]:::red
-    F["📤 Response Delivery"]:::teal
+    C["🔎 Retrieval"]:::orange
+    D["💬 Response Generation"]:::red
+    E["📤 Response Delivery"]:::teal
 
     %% Connections
     A --> B
     B --> C
     C --> D
     D --> E
-    E --> F
 
     %% Detailed subprocesses as small nodes
-    A1["Query Analysis"]:::blueLight
-    A2["Intent Classification"]:::blueLight
-    A --> A1 --> A2 --> B
-
-    B1["Filter Pipeline"]:::greenLight
+    B1["Filtering Pipeline"]:::greenLight
     B2["Vector Pipeline"]:::greenLight
-    B3["Graph Pipeline"]:::greenLight
-    B --> B1 & B2 & B3 --> C
+    B --> B1 & B2 --> C
 
-    C1["Pinecone\nVector Search"]:::orangeLight
-    C2["Neo4j\nGraph Traversal"]:::orangeLight
+    C1["Pinecone Vector Search"]:::orangeLight
+    C2["Regex/Entity Filters"]:::orangeLight
     C --> C1 & C2 --> D
 
-    D1["Relevance Scoring"]:::purpleLight
-    D2["Context Assembly"]:::purpleLight
+    D1["Prompt Engineering"]:::redLight
+    D2["Gemini 1.5 Pro"]:::redLight
     D --> D1 --> D2 --> E
 
-    E1["Prompt Engineering"]:::redLight
-    E2["Gemini 1.5 Pro"]:::redLight
-    E --> E1 --> E2 --> F
+    E2["Final Formatting"]:::tealLight
+    E --> E2
 
-    F1["Citation Linking"]:::tealLight
-    F2["Final Formatting"]:::tealLight
-    F --> F1 --> F2
-    
     %% Styling classes
     classDef blue fill:#1890ff,color:white,stroke:#005bb5,stroke-width:2px
     classDef green fill:#52c41a,color:white,stroke:#389e0d,stroke-width:2px
     classDef orange fill:#fa8c16,color:white,stroke:#d46b08,stroke-width:2px
-    classDef purple fill:#722ed1,color:white,stroke:#531dab,stroke-width:2px
     classDef red fill:#f5222d,color:white,stroke:#cf1322,stroke-width:2px
     classDef teal fill:#13c2c2,color:white,stroke:#08979c,stroke-width:2px
     
-    classDef blueLight fill:#e6f7ff,color:#1890ff,stroke:#91d5ff,stroke-width:1px
     classDef greenLight fill:#f6ffed,color:#52c41a,stroke:#b7eb8f,stroke-width:1px
     classDef orangeLight fill:#fff7e6,color:#fa8c16,stroke:#ffd591,stroke-width:1px
-    classDef purpleLight fill:#f9f0ff,color:#722ed1,stroke:#d3adf7,stroke-width:1px
     classDef redLight fill:#fff1f0,color:#f5222d,stroke:#ffa39e,stroke-width:1px
     classDef tealLight fill:#e6fffb,color:#13c2c2,stroke:#87e8de,stroke-width:1px
 ```
@@ -117,7 +101,6 @@ flowchart TB
 - API Keys:
   - Google API (Gemini)
   - Pinecone API
-  - Neo4j (optional for graph features)
   - (Optional) Additional crawler API keys
 
 ### Installation
@@ -163,9 +146,6 @@ Create a `.env` file in the project root:
 GOOGLE_API_KEY=your_google_api_key
 PINECONE_API_KEY=your_pinecone_api_key
 GEMINI_API_KEY=your_gemini_api_key
-NEO4J_URI=bolt://localhost:7687
-NEO4J_USERNAME=neo4j
-NEO4J_PASSWORD=password
 
 # Vector Database Settings
 PINECONE_INDEX_NAME=rag
@@ -241,18 +221,7 @@ Understand and route user queries with precision using a sophisticated intent cl
 - **Dynamic Pipeline Orchestration**  
   - **Filter Pipeline**: High-precision regex and entity filters for FAQs and rule-based intents
   - **Vector Search Pipeline**: Sub-millisecond ANN retrieval with Pinecone's HNSW indexes
-  - **Graph Traversal Pipeline**: Neo4j-powered knowledge graph navigation for relationship resolution
 
-## 🌐 Knowledge Graph Augmentation
-
-Enhance retrieval with structured, context-rich data from knowledge graphs.
-
-- **LLM-Derived Graph Construction**  
-  - Gemini 1.5 Pro transforms documents into RDF triples for a sparse, directed graph
-- **Hybrid GraphRAG**  
-  - Multi-hop context extraction via breadth-first or depth-first traversals
-- **Graph + Vector Fusion**  
-  - Unified scoring with graph metrics (e.g., PageRank) and vector cosine similarity
 
 ## ⚡ High-Performance Backend & Indexing
 
@@ -263,7 +232,6 @@ Scalable infrastructure for lightning-fast responses.
 | Streamlit  | Frontend     | Dark-mode UI, real-time chat, graph visuals               |
 | FastAPI    | Backend      | Async endpoints, 10K+ req/sec, <50 ms latency             |
 | Pinecone   | Vector Store | P2 indexes, 100M+ vectors, 15 ms ANN lookups              |
-| Neo4j      | Graph DB     | Cypher queries, relationship traversals, knowledge graphs |
 
 ## 🤝 Conversational Memory & Context
 
@@ -315,28 +283,6 @@ Maintain seamless interactions with advanced memory management.
   ```
 - **Response**: AI-generated responses
 
-## 🧪 Testing
-
-Run unit tests:
-```bash
-pytest tests/
-```
-
-Run integration tests:
-```bash
-pytest tests/integration/ --live
-```
-
-## 📊 Performance Benchmarks
-
-| Operation            | Average Latency | p95 Latency | Throughput  |
-|----------------------|-----------------|-------------|-------------|
-| Intent Classification| 15 ms           | 25 ms       | 500 req/sec |
-| Vector Search        | 40 ms           | 65 ms       | 250 req/sec |
-| Graph Traversal      | 55 ms           | 80 ms       | 180 req/sec |
-| Response Generation  | 350 ms          | 500 ms      | 20 req/sec  |
-| End-to-End           | 450 ms          | 650 ms      | 15 req/sec  |
-
 ## 📂 Project Structure
 ```
 rag-web-crawler-chatbot/
@@ -353,7 +299,6 @@ rag-web-crawler-chatbot/
 ├── services/
 │   ├── crawl_service.py
 │   ├── query_service.py
-│   ├── graph_service.py
 │   └── chat_service.py
 ├── ui/
 │   ├── pages/
@@ -363,7 +308,6 @@ rag-web-crawler-chatbot/
 │   └── settings.py
 ├── scripts/
 │   ├── init_pinecone.py
-│   └── init_neo4j.py
 ├── tests/
 │   ├── unit/
 │   └── integration/
