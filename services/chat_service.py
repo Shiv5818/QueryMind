@@ -3,60 +3,35 @@ from langchain_pinecone import PineconeVectorStore
 from config.settings import settings
 from core.llm import get_llm
 from api.schemas import ChatRequest, ChatResponse
+from typing import Dict, Any
+from services.intent_detection_service import IntentDetectionService
+
+# Initialize the intent detection service
+intent_service = IntentDetectionService()
 
 async def process_chat(request: ChatRequest, vector_store: PineconeVectorStore) -> ChatResponse:
     """
-    Process a chat request, retrieving relevant documents and generating a response.
+    Process incoming chat requests using intent detection to route to appropriate pipeline.
     
     Args:
-        request: The chat request containing the user message and optional conversation history
-        vector_store: The vector store to search in
+        request: The chat request containing user message and history
+        vector_store: Vector store for RAG retrieval
         
     Returns:
-        ChatResponse object with the assistant's response
-        
-    Raises:
-        Exception: If the chat process fails
+        Chat response with answer to user's query
     """
     try:
-        # Retrieve relevant documents from vector store (reduced from 20 to 5)
-        logger.info(f"Retrieving relevant documents for: '{request.message}'")
-        docs = vector_store.similarity_search(
-            request.message, 
-            k=10  # Reduced from settings.SIMILARITY_TOP_K
-        )
-        context = "\n".join([doc.page_content for doc in docs])
-        logger.debug(f"Retrieved {len(docs)} relevant documents")
+        logger.info(f"Processing chat request: '{request.message}'")
         
-        # Build conversation history string if available
-        conversation_context = ""
-        if request.conversation_history and len(request.conversation_history) > 0:
-            logger.debug(f"Processing conversation history with {len(request.conversation_history)} messages")
-            conversation_context = "Previous conversation:\n"
-            for item in request.conversation_history:
-                conversation_context += f"{item.role}: {item.content}\n"
-            conversation_context += "\n"
+        # Use intent detection service to process the query
+        response = await intent_service.process_query(request, vector_store)
         
-        # Construct prompt with context and conversation history
-        prompt = f"""Based on the following context and previous conversation, answer the user's question.
-
-{conversation_context}
-Context:
-{context}
-
-User's question: {request.message}
-
-Please provide a helpful response based on the context information. If the answer cannot be found in the context, say so clearly but try to provide related information if possible.
-"""
+        logger.info(f"Chat response generated successfully with {len(response.response)} characters")
+        return response
         
-        # Get response from LLM
-        logger.info("Generating response from LLM")
-        llm = get_llm()
-        response = await llm.ainvoke(prompt)
-        response_text = response.content
-        
-        logger.debug(f"Generated response of {len(response_text)} characters")
-        return ChatResponse(response=response_text)
     except Exception as e:
         logger.error(f"Chat processing failed: {str(e)}", exc_info=True)
-        raise Exception(f"Chat processing failed: {str(e)}")
+        return ChatResponse(
+            response="I'm sorry, I encountered an error while processing your request. Please try again or contact support if the issue persists.",
+            metadata={"error": str(e)}
+        )
