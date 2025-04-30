@@ -34,16 +34,16 @@ In an era of information overload, our RAG Web Crawler & Chatbot redefines how u
   - Query Service: Vector search and document retrieval
   - Chat Service: LLM integration and response generation
 - **Vector Store**: Pinecone integration for document storage and retrieval
-- **LLM Integration**: Google Gemini 1.5 Pro for text generation
+- **LLM Integration**: meta-llama/Llama-2-7b-chat-hf for text generation
 
 ### Frontend (Streamlit)
 - **Web Crawler Tab**: Interface for URL submission and crawling
 - **RAG Chatbot Tab**: Chat interface with conversation history
-- **Knowledge Graph Visualizer**: Interactive graph exploration
+- **Knowledge memory Visualizer**: Interactive memory exploration
 - **Sidebar**: Application information and session details
 - **Custom Styling**: Modern, responsive dark theme UI
 
-## 🔗 Graph-Vector Hybrid Search Workflow
+## 🔗 Vector Hybrid Search Workflow
 
 A seamless process for retrieving and generating responses.
 
@@ -99,7 +99,7 @@ flowchart TB
 - Python 3.8+
 - Docker & Docker Compose (optional for containerized setup)
 - API Keys:
-  - Google API (Gemini)
+  - Hugging face access token
   - Pinecone API
   - (Optional) Additional crawler API keys
 
@@ -143,17 +143,16 @@ Create a `.env` file in the project root:
 
 ```env
 # API Keys
-GOOGLE_API_KEY=your_google_api_key
+HUGGINGFACE_KEY=your_huggingface_api_key
 PINECONE_API_KEY=your_pinecone_api_key
-GEMINI_API_KEY=your_gemini_api_key
 
 # Vector Database Settings
 PINECONE_INDEX_NAME=rag
 PINECONE_ENVIRONMENT=us-west1-gcp
-EMBEDDING_MODEL=text-embedding-ada-002
+EMBEDDING_MODEL=intfloat/e5-base-v2
 
 # LLM Settings
-LLM_MODEL=gemini-1.5-pro
+LLM_MODEL=meta-llama/Llama-2-7b-chat-hf
 MAX_TOKENS=8192
 TEMPERATURE=0.1
 
@@ -176,12 +175,6 @@ LOG_LEVEL=INFO
 
 ```bash
 python scripts/init_pinecone.py
-```
-
-#### 5. Initialize Neo4j Database (Optional for Graph Features)
-
-```bash
-python scripts/init_neo4j.py
 ```
 
 ### Running the Application
@@ -298,6 +291,7 @@ rag-web-crawler-chatbot/
 │   └── text_processing.py
 ├── services/
 │   ├── crawl_service.py
+|   ├── intent_detection_service.py
 │   ├── query_service.py
 │   └── chat_service.py
 ├── ui/
