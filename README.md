@@ -7,18 +7,15 @@ In an era of information overload, our RAG Web Crawler & Chatbot redefines how u
 ## 😊 Demo Video:
 [![Demo Video](https://img.youtube.com/vi/7H3CFDmschA/0.jpg)](https://www.youtube.com/watch?v=7H3CFDmschA)
 
-## 🚀 Key Features
+## 🚀 Key Features 
 
-1. **Intent Intelligence**  
-   Dynamically routes each incoming request to the optimal service based on real-time intent analysis, ensuring precision handling for every query.
-
-2. **High Performance**  
+1. **High Performance**  
    Scales horizontally with a backend engineered for sub-100 ms end-to-end latency, even under high concurrency.
 
-3. **Conversational Memory**  
+2. **Conversational Memory**  
    Maintains dialogue context across turns and sessions, enabling seamless, stateful interactions without losing track of prior information.
 
-4. **AI-Powered Web Scraping**  
+3. **AI-Powered Web Scraping**  
    - **Automated Extraction**: Uses NLP and computer-vision models to detect and pull structured data (tables, lists, metadata) from any public website.  
    - **Adaptive Selectors**: Learns page layouts and self-heals against template changes, reducing maintenance overhead.  
    - **Compliance-Aware Crawling**: Respects `robots.txt`, rate limits requests, and includes built-in proxy rotation.  
@@ -197,18 +194,6 @@ docker-compose up
 - **FastAPI Backend**: http://localhost:8000
 - **API Documentation**: http://localhost:8000/docs
 - **Streamlit Frontend**: http://localhost:8501
-
-## 🔍 Advanced Intent Classification & Routing
-
-Understand and route user queries with precision using a sophisticated intent classification engine.
-
-- **Multi-label Intent Taxonomy**  
-  - Tags queries against 30+ intent classes (e.g., "factual_lookup", "comparative_search", "actionable_insight")
-  - Uses a fine-tuned classifier for accurate intent detection
-
-- **Dynamic Pipeline Orchestration**  
-  - **Filter Pipeline**: High-precision regex and entity filters for FAQs and rule-based intents
-  - **Vector Search Pipeline**: Sub-millisecond ANN retrieval with Pinecone's HNSW indexes
 
 
 ## ⚡ High-Performance Backend & Indexing
