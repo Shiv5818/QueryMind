@@ -50,26 +50,22 @@ A seamless process for retrieving and generating responses.
 ```mermaid
 flowchart TB
     %% Main flow nodes with icons
-    A["🔍 Intent Detection"]:::blue
     B["🧠 Pipeline Selection"]:::green
     C["🔎 Retrieval"]:::orange
     D["💬 Response Generation"]:::red
     E["📤 Response Delivery"]:::teal
 
     %% Connections
-    A --> B
     B --> C
     C --> D
     D --> E
 
-    %% Detailed subprocesses as small nodes
-    B1["Filtering Pipeline"]:::greenLight
+    %% Detailed subprocesses
     B2["Vector Pipeline"]:::greenLight
-    B --> B1 & B2 --> C
+    B --> B2 --> C
 
     C1["Pinecone Vector Search"]:::orangeLight
-    C2["Regex/Entity Filters"]:::orangeLight
-    C --> C1 & C2 --> D
+    C --> C1 --> D
 
     D1["Prompt Engineering"]:::redLight
     D2["Gemini 1.5 Pro"]:::redLight
@@ -79,7 +75,6 @@ flowchart TB
     E --> E2
 
     %% Styling classes
-    classDef blue fill:#1890ff,color:white,stroke:#005bb5,stroke-width:2px
     classDef green fill:#52c41a,color:white,stroke:#389e0d,stroke-width:2px
     classDef orange fill:#fa8c16,color:white,stroke:#d46b08,stroke-width:2px
     classDef red fill:#f5222d,color:white,stroke:#cf1322,stroke-width:2px
