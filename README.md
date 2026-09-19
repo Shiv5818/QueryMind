@@ -4,8 +4,7 @@
 
 In an era of information overload, our RAG Web Crawler & Chatbot redefines how users interact with data. By integrating meta-llama/Llama-2-7b-chat-hf's massive context window, Pinecone's high-performance vector indexes, and FastAPI optimizations, this system achieves sub-100 ms query routing and response generation at scale. Whether it's answering complex queries or maintaining conversational context, this project pushes the boundaries of AI-driven retrieval systems.
 
-## 😊 Demo Video:
-[![Demo Video](https://img.youtube.com/vi/7H3CFDmschA/0.jpg)](https://www.youtube.com/watch?v=7H3CFDmschA)
+
 
 ## 🚀 Key Features 
 
